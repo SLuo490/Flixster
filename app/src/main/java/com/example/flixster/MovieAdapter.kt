@@ -1,7 +1,7 @@
 package com.example.flixster
 
 import android.content.Context
-import android.util.Log
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,14 +16,12 @@ class MovieAdapter(private val context: Context, private val movies : List<Movie
 
     // Expensive operation: create a view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.i(TAG, "onCreateViewHolder")
         val view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
         return ViewHolder(view)
     }
 
     // Cheap: simply bind data to an existing viewholder
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder position $position")
         val movie = movies[position]
         holder.bind(movie)
     }
@@ -40,8 +38,14 @@ class MovieAdapter(private val context: Context, private val movies : List<Movie
         fun bind(movie: Movie) {
             tvTitle.text = movie.title
             tvOverview.text = movie.overview
-            // Use Glide to Display Image
-            Glide.with(context).load(movie.posterImageUrl).into(ivPoster)
+
+            // If current orientation is landscape use backdrop image else use poster image
+            val orientation = context.resources.configuration.orientation
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                Glide.with(context).load(movie.backdropImageUrl).into(ivPoster)
+            } else {
+                Glide.with(context).load(movie.posterImageUrl).into(ivPoster)
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ class MovieAdapter(private val context: Context, private val movies : List<Movie
             tvTitle.text = movie.title
             tvOverview.text = movie.overview
 
-            // If current orientation is landscape use backdrop image else use poster image
+             // If current orientation is landscape use backdrop image else use poster image
             val orientation = context.resources.configuration.orientation
             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 Glide.with(context).load(movie.backdropImageUrl).into(ivPoster)

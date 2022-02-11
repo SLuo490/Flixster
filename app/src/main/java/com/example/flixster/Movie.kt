@@ -12,6 +12,7 @@ data class Movie (
 
     val posterImageUrl = "https://image.tmdb.org/t/p/w342/$posterPath"
     val backdropImageUrl = "https://image.tmdb.org/t/p/w1280/$backdropPath"
+
     companion object {
         fun fromJsonArray(movieJsonArray: JSONArray): List<Movie> {
             val movies = mutableListOf<Movie>()

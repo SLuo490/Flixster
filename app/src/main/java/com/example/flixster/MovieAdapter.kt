@@ -2,6 +2,7 @@ package com.example.flixster
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,9 +43,9 @@ class MovieAdapter(private val context: Context, private val movies : List<Movie
              // If current orientation is landscape use backdrop image else use poster image
             val orientation = context.resources.configuration.orientation
             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                Glide.with(context).load(movie.backdropImageUrl).into(ivPoster)
+                Glide.with(context).load(movie.backdropImageUrl).placeholder(R.drawable.placeholder).into(ivPoster)
             } else {
-                Glide.with(context).load(movie.posterImageUrl).into(ivPoster)
+                Glide.with(context).load(movie.posterImageUrl).placeholder(R.drawable.placeholder).into(ivPoster)
             }
         }
     }
